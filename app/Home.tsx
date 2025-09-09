@@ -53,9 +53,11 @@ const Home:FC<home> = ({email}) => {
       }
       const date=new Date();
        const today = new Date().toISOString().split("T")[0];
+       console.log(today)
       const response2=await axios.get("http://192.168.31.103:8080/initizeItem",{
         params:{id:response.data.id,date:today}
       })
+
 
       console.log(Usedata)
       setdata(Usedata)

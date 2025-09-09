@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { DarkTheme, DefaultTheme, ThemeProvider, useTheme } from "@react-navigation/native";
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from "react";
+import { View } from 'react-native';
 import Add from "./Add";
 import History from "./History";
 import Home from "./Home";
@@ -66,14 +67,14 @@ const [email,setEmail]=useState<String|null>(null);
   <ThemeProvider value={theme?lighttheme:darkTheme}>
   <StatusBar style={colors.text=="rgb(28, 28, 30)"?"light":"dark"}/>
   <Tab.Navigator screenOptions={{ headerShown:false,animation:'shift'}}>
-    <Tab.Screen name="Home"  options={{tabBarIcon:()=><Entypo name="home" size={24} color={theme?lighttheme.colors.text:darkTheme.colors.text} />}}>
+    <Tab.Screen name="Home"  options={{tabBarIcon:({focused,size})=><View style={{height:(focused?size+10:size)}}><Entypo name="home" size={focused?32:24} color={theme?lighttheme.colors.text:darkTheme.colors.text} /></View>}}>
    {()=><Home email={email}/>}
     </Tab.Screen>
-    <Tab.Screen name="Add" component={Add} options={{tabBarIcon:()=><Entypo name="add-to-list" size={24} color={theme?lighttheme.colors.text:darkTheme.colors.text} />}}/>
-    <Tab.Screen name="History" options={{tabBarIcon:()=><FontAwesome5 name="history" size={24} color={theme?lighttheme.colors.text:darkTheme.colors.text} />}}>
+    <Tab.Screen name="Add" component={Add} options={{tabBarIcon:({focused,size})=><View style={{height:(focused?size+10:size)}} ><Entypo name="add-to-list" size={focused?32:24} color={theme?lighttheme.colors.text:darkTheme.colors.text} /></View>}}/>
+    <Tab.Screen name="History" options={{tabBarIcon:({focused,size})=><View style={{height:(focused?size+10:size)}}><FontAwesome5 name="history" size={focused?30:24} color={theme?lighttheme.colors.text:darkTheme.colors.text} /></View>}}>
      {()=><History email={email}/>}
     </Tab.Screen>
-    <Tab.Screen name="Settings" options={{tabBarIcon:()=><Feather name="settings" size={24} color={theme?lighttheme.colors.text:darkTheme.colors.text} />}}>
+    <Tab.Screen name="Settings" options={{tabBarIcon:({focused,size})=><View style={{height:(focused?size+10:size)}}><Feather name="settings" size={focused?32:24} color={theme?lighttheme.colors.text:darkTheme.colors.text} /></View>}}>
           {() => <Setting settheme={settheme} theme={theme} email={email} />}
      </Tab.Screen>
    
